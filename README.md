@@ -23,7 +23,7 @@ extension/          Chrome Extension (MV3)
 server/
   src/chunker.js    마크다운 → heading 경로가 붙은 청크 (출처 표기의 근거)
   src/retriever.js  한국어 BM25 (+ VOYAGE_API_KEY 있으면 임베딩 하이브리드)
-  src/llm.js        Claude Vision / 요약 / Q&A, 키 없으면 MOCK
+  src/llm.js        LLM Vision / 요약 / Q&A, 키 없으면 MOCK
   src/index.js      /api/analyze, /api/ask, /api/policy/:id
   policies/*.md     샘플 정책 문서 (시연용 가상 문서)
   scripts/test-pipeline.js  검색 품질 회귀 테스트
