@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Figma iframe 임베드 테스트</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; background: #f6f7f9; }
+      h1 { font-size: 16px; margin: 0 0 12px; }
+      .row { display: flex; gap: 8px; margin-bottom: 12px; }
+      input { flex: 1; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 13px; }
+      button { padding: 8px 14px; border: 0; border-radius: 6px; background: #111; color: #fff; cursor: pointer; }
+      .frame-wrap { background: #fff; border: 1px solid #e3e5e8; border-radius: 8px; overflow: hidden; height: 70vh; }
+      iframe { width: 100%; height: 100%; border: 0; }
+      .hint { color: #666; font-size: 12px; margin: 6px 0 0; }
+      code { background: #eee; padding: 1px 4px; border-radius: 3px; }
+    </style>
+  </head>
+  <body>
+    <h1>Figma iframe 임베드 테스트</h1>
+    <div class="row">
+      <input id="url" type="text" placeholder="Figma 파일/프레임 URL 붙여넣기 (예: https://www.figma.com/design/xxx/...?node-id=1-2)" />
+      <button id="go">임베드</button>
+    </div>
+    <p class="hint">
+      최신 임베드 도메인 <code>embed.figma.com</code> 을 씁니다. (구형 <code>www.figma.com/embed</code> 는
+      <code>X-Frame-Options: SAMEORIGIN</code> 이라 외부 사이트 임베드가 막힘.)
+      파일이 "링크 가진 사람 보기 가능"이거나, 이 브라우저가 접근 권한 있는 Figma 계정으로 로그인돼 있어야 렌더됩니다.
+    </p>
+    <div class="frame-wrap">
+      <iframe id="figma" allowfullscreen title="Figma embed"></iframe>
+    </div>
+
+    <script>
+      const $url = document.getElementById('url');
+      const $iframe = document.getElementById('figma');
+      function embed() {
+        const raw = $url.value.trim();
+        if (!raw) return;
+        try {
+          // 일반 Figma URL(www.figma.com/design/...)을 임베드 URL로 변환:
+          // 호스트를 embed.figma.com 으로 바꾸고 embed-host 파라미터를 붙인다.
+          const u = new URL(raw);
+          u.hostname = 'embed.figma.com';
+          if (!u.searchParams.has('embed-host')) u.searchParams.set('embed-host', 'safience');
+          $iframe.src = u.toString();
+        } catch {
+          alert('올바른 Figma URL이 아닙니다. 예: https://www.figma.com/design/KEY/이름?node-id=1-2');
+        }
+      }
+      document.getElementById('go').addEventListener('click', embed);
+      $url.addEventListener('keydown', (e) => { if (e.key === 'Enter') embed(); });
+    </script>
+  </body>
+</html>

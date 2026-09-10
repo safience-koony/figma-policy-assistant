@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 정책 도우미</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header class="hd">
+    <div class="hd__mark">P</div>
+    <div class="hd__title">AI 정책 도우미</div>
+    <div class="hd__status" id="status"><span class="dot dot--off"></span>연결 확인 중</div>
+  </header>
+
+  <main class="body" id="body">
+    <!-- 1) 빈 상태 -->
+    <section class="empty" id="view-empty">
+      <div class="empty__art">🔍</div>
+      <div class="empty__t">현재 Figma 화면을 분석합니다</div>
+      <div class="empty__d">Figma에서 분석할 프레임을 선택한 뒤 버튼을 누르면 텍스트 레이어를 직접 읽어 관련 정책과 개발 시 주의사항을 찾아드립니다.</div>
+      <button class="btn btn--primary" id="btn-analyze">현재 화면 분석</button>
+    </section>
+
+    <!-- 2) 로딩 -->
+    <section class="card" id="view-loading" hidden>
+      <div class="steps">
+        <div class="step" data-step="capture"><span class="step__ic">✓</span>Figma 프레임 읽기</div>
+        <div class="step" data-step="vision"><span class="step__ic">✓</span>화면 문맥 분석</div>
+        <div class="step" data-step="search"><span class="step__ic">✓</span>정책 문서 검색</div>
+        <div class="step" data-step="summary"><span class="step__ic">✓</span>정책 요약</div>
+      </div>
+    </section>
+
+    <!-- 선택 프레임 확인 -->
+    <section class="card" id="view-confirm" hidden></section>
+
+    <!-- 3) 결과 -->
+    <section id="view-result" hidden>
+      <div class="card" id="screen-card"></div>
+      <div id="policies"></div>
+      <div id="notes"></div>
+      <div id="open-questions"></div>
+      <div id="chat"></div>
+    </section>
+
+    <div class="err" id="view-error" hidden></div>
+  </main>
+
+  <footer class="ft" id="footer" hidden>
+    <div class="suggests" id="suggests"></div>
+    <div class="input">
+      <textarea id="q" rows="1" placeholder="이 화면에 대해 질문하기"></textarea>
+      <button class="send" id="send" disabled>↑</button>
+    </div>
+    <div class="hint">답변은 사내 정책 문서 원문에 근거하며 출처가 함께 표시됩니다.</div>
+  </footer>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

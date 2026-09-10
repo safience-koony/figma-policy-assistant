@@ -1,0 +1,20 @@
+# 의존성
+node_modules/
+
+# 환경 변수 (실 키·토큰). .env.example 만 커밋한다
+.env
+.env.*
+!.env.example
+
+# OS / 에디터
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# 로그·캐시·빌드 산출물
+*.log
+npm-debug.log*
+.cache/
+dist/
+build/

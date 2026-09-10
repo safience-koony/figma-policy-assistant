@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Figma 정책 도우미",
+  "version": "0.1.0",
+  "description": "선택한 Figma 프레임을 분석해 관련 사내 정책과 개발 주의사항을 찾아줍니다.",
+  "permissions": ["sidePanel", "activeTab", "tabs", "scripting", "storage"],
+  "host_permissions": ["https://www.figma.com/*", "http://localhost:8787/*"],
+  "optional_host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "action": { "default_title": "정책 도우미 열기" },
+  "content_scripts": [
+    {
+      "matches": ["https://www.figma.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>정책 라이브러리</title>
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="/">Policy Library</a>
+        <p class="brand-copy">팀의 제품 정책을 빠르게 찾고, 원문까지 확인하세요.</p>
+        <label class="search"><span>검색</span><input id="search" type="search" placeholder="정책명 또는 내용" autocomplete="off" /></label>
+        <div class="count" id="count"></div>
+        <nav class="policy-list" id="policy-list" aria-label="정책 목록"></nav>
+      </aside>
+      <main class="reader">
+        <div class="reader-top">
+          <div><p class="eyebrow">POLICY SOURCE</p><h1 id="title">정책을 불러오는 중</h1></div>
+          <div class="tabs" role="tablist"><button class="tab active" data-view="read">읽기</button><button class="tab" data-view="source">원문 MD</button><button class="tab" data-view="history">변경 이력</button></div>
+        </div>
+        <p class="meta" id="meta"></p>
+        <article class="markdown" id="content" aria-live="polite"></article>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
